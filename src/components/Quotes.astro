@@ -29,19 +29,16 @@ const menuStickyHeight = "4.5rem";
 
 <script>
   const quoteBar = document.getElementById('quote-bar');
-  console.log('Quote bar element:', quoteBar);
   let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
   let lastScrollY = window.scrollY; // Posición inicial del scroll
   const mobileBreakpoint = 991; // Tailwind CSS 'md' breakpoint
 
   if (quoteBar) {
     const showQuoteBar = () => {
-      console.log('Showing quote bar');
       quoteBar.classList.remove('hidden');
     };
 
     const hideQuoteBar = () => {
-      console.log('Hiding quote bar');
       quoteBar.classList.add('hidden'); // Ocultar la barra
       scrollTimeout = setTimeout(() => {
           console.log("Delayed for 1 second.");
@@ -51,7 +48,6 @@ const menuStickyHeight = "4.5rem";
       //scrollTimeout = setTimeout(showQuoteBar, 2000)
     };
 
-    console.log('Quote bar is initialized and ready.');
     const scrollContainer = document.querySelector('body') || window;
 
   scrollContainer.addEventListener('scroll', () => {

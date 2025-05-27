@@ -125,7 +125,7 @@ import Logo from "./logo.astro";
   document.addEventListener("DOMContentLoaded", () => {
     const menuLinks = document.querySelectorAll('a[href^="/#"]');
     const sections = Array.from(menuLinks).map((link) => {
-      const targetId = link.getAttribute("href")?.substring(2); // Obtener el ID del destino
+      const targetId:any = link.getAttribute("href")?.substring(2); // Obtener el ID del destino
       return document.getElementById(targetId);
     });
 

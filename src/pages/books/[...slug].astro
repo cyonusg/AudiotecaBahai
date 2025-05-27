@@ -1,0 +1,19 @@
+---
+import { getCollection, getEntryBySlug, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection('books');
+  return posts.map((post:any) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug('books', slug);
+if (!entry) {
+  throw new Error(`Book not found for slug: ${slug}`);
+}
+const { Content } = await render(entry);
+---
+<h1>{entry.data.title}</h1>
+<Content />

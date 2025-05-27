@@ -1,0 +1,72 @@
+---
+import quotesData from '../data/quotes.json'; // Ajusta la ruta si es necesario
+
+interface Quote {
+  text: string;
+  author: string;
+}
+
+const quotes: Quote[] = quotesData;
+const randomIndex = Math.floor(Math.random() * quotes.length);
+const randomQuote = quotes[randomIndex];
+
+const menuStickyHeight = "4.5rem";
+---
+
+{randomQuote && (
+  <div
+    id="quote-bar"
+    class="bg-gray-100 border-b border-gray-200 px-4 py-2 text-gray-900 text-center w-full
+           transform transition-all duration-300 ease-in
+           sticky z-40"
+    style={`top: ${menuStickyHeight};`}
+  >
+    <p class="text-sm sm:text-base font-medium">
+      "{randomQuote.text}" — {randomQuote.author}
+    </p>
+  </div>
+)}
+
+<script>
+  const quoteBar = document.getElementById('quote-bar');
+  console.log('Quote bar element:', quoteBar);
+  let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
+  let lastScrollY = window.scrollY; // Posición inicial del scroll
+  const mobileBreakpoint = 991; // Tailwind CSS 'md' breakpoint
+
+  if (quoteBar) {
+    const showQuoteBar = () => {
+      console.log('Showing quote bar');
+      quoteBar.classList.remove('hidden');
+    };
+
+    const hideQuoteBar = () => {
+      console.log('Hiding quote bar');
+      quoteBar.classList.add('hidden'); // Ocultar la barra
+      scrollTimeout = setTimeout(() => {
+          console.log("Delayed for 1 second.");
+          clearInterval(scrollTimeout); // Limpiar el timeout
+          showQuoteBar(); // Mostrar la barra después de 2 segundos
+        }, 2000);
+      //scrollTimeout = setTimeout(showQuoteBar, 2000)
+    };
+
+    console.log('Quote bar is initialized and ready.');
+    const scrollContainer = document.querySelector('body') || window;
+
+  scrollContainer.addEventListener('scroll', () => {
+     // console.log('Scroll event triggered '); 
+      const currentScrollY = window.scrollY; // Posición actual del scroll
+      const isMobile = window.innerWidth < mobileBreakpoint;
+      console.log('Current scroll position:', currentScrollY, 'Last scroll position:', lastScrollY, 'Is mobile:', isMobile);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout); // Limpiar el timeout anterior
+      }
+      console.log('Scroll timeout cleared', isMobile);
+      if(isMobile){
+        hideQuoteBar();
+      }
+
+    }, { passive: true });
+  }
+</script>

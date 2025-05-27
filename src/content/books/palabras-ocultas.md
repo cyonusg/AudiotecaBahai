@@ -1,0 +1,16 @@
+---
+title: "Las Palabras Ocultas"
+pubDate: 1858
+description: "Las Palabras Ocultas, una obra esencial de la fe baháʼí, fue revelada por Baháʼu'lláh alrededor de 1858, durante su exilio en Bagdad."
+image:
+tags: ["Español"]
+url: "https://open.spotify.com/show/2c6Ue5Mqa2YGYpocnemVFg?si=272dcc43a1954857"
+target: "_blank"
+---
+
+Kalimát-i-Maknúnih (کلمات مکنونه) —conocido como Las Palabras Ocultas— es una joya espiritual escrita por Bahá'u'lláh en Bagdad hacia el año 1857. Este audiolibro no es solo una lectura: es una experiencia profunda de transformación interior.
+
+A través de breves y poderosas meditaciones —71 en árabe y 82 en persa—, Bahá'u'lláh destila la esencia de verdades espirituales universales, reveladas en un lenguaje íntimo, claro y profundamente inspirador.
+
+Cada frase es una llamada al alma.
+Cada palabra, una llave para abrir la puerta al autoconocimiento y la conexión con lo divino.

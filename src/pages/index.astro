@@ -1,11 +1,24 @@
 ---
-import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Quotes from '../components/Quotes.astro';
+import Menu from '../components/menu.astro';
 import Layout from '../layouts/Layout.astro';
+import Mission from '../components/Mission.astro';
+import Books from '../components/Books.astro';
+import Collaborators from '../components/Collaborators.astro';
+import Footer from '../components/Footer.astro';
 import "../styles/global.css";
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Header title="titulo" description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, nisi. Natus, provident"/>
+<Layout title="Inicio | Audioteca Bahá'í">
+	<Menu />
+	<Quotes />
+	<Hero title="titulo" description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, nisi. Natus, provident"/>
+	<Mission />
+	<Books />
+	<Collaborators />
+	<Footer />
 </Layout>

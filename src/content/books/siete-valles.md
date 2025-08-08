@@ -2,8 +2,10 @@
 title: "Los siete valles"
 pubDate: 1858
 description: "Es una de las obras místicas más sublimes de Bahá'u'lláh, escrita en un lenguaje profundo y poético para guiar al alma en su viaje hacia la iluminación."
-image:
+image: sieteValles.jpg
+url: "https://open.spotify.com/show/3gL1ieNDqOOlrqeDGrGceP?si=lEgwlxsSSPSG7pNRWT7seQ"
 tags: ["Español"]
+target: "_blank"
 ---
 
 Haft Vádí  (هفت وادی) —conocido como Los Siete Valles— es una de las obras místicas más sublimes de Bahá'u'lláh, escrita en un lenguaje profundo y poético para guiar al alma en su viaje hacia la iluminación.

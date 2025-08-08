@@ -16,13 +16,13 @@ import Logo from '../components/Logo.astro';
         <nav aria-label="Footer Navigation">
           <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end">
             <li>
-              <a class="text-gray-700 transition hover:text-teal-600 dark:hover:text-teal-300" href="/#quienesSomos">Quienes Somos</a>
+              <a class="text-gray-600 transition dark:hover:text-teal-300 a-official" href="/#quienesSomos">Quienes Somos</a>
             </li>
             <li>
-              <a class="text-gray-700 transition hover:text-teal-600 dark:hover:text-teal-300" href="/#books">AudioLibros</a>
+              <a class="text-gray-600 transition dark:hover:text-teal-300 a-official " href="/#books">AudioLibros</a>
             </li>
             <li>
-              <a class="text-gray-700 transition hover:text-teal-600 dark:hover:text-teal-300" href="/#colaboradores">Colaboradores</a>
+              <a class="text-gray-600 transition  dark:hover:text-teal-300 a-official" href="/#colaboradores">Colaboradores</a>
             </li>
           </ul>
         </nav>
@@ -41,7 +41,12 @@ import Logo from '../components/Logo.astro';
     align-items: center;
     margin-bottom: 1rem;
     max-width: 219px;
+  }
 
   .wrap-logo img {
     height: auto;
   }
+  .a-official:hover {
+    color: var(--color-indigo-600);
+  }
+</style>

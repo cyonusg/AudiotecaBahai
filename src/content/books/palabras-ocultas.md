@@ -2,7 +2,7 @@
 title: "Las Palabras Ocultas"
 pubDate: 1858
 description: "Las Palabras Ocultas, una obra esencial de la fe baháʼí, fue revelada por Baháʼu'lláh alrededor de 1858, durante su exilio en Bagdad."
-image:
+image: hiddenWords.jpg
 tags: ["Español"]
 url: "https://open.spotify.com/show/2c6Ue5Mqa2YGYpocnemVFg?si=272dcc43a1954857"
 target: "_blank"

@@ -1,5 +1,6 @@
 ---
 import caloImage from '../assets/calo.png';
+import eugeImage from '../assets/eugenia.png';
 
 const colaboradores = [
   {
@@ -14,9 +15,9 @@ const colaboradores = [
   {
     nombre: "Eugenia Araujo",
     rol: "Narradora",
-    imagen: "https://randomuser.me/api/portraits/women/44.jpg",
+    imagen: eugeImage.src,
     titulo: "Cuidar las palabras es preservar el mensaje",
-    descripcion: "DEBES PONER UNA CITA DE ALGO QUE QUIERAS COMPARTIR",
+    descripcion: "Sois los frutos de un solo árbol y las hojas de una sola rama. Trataos unos a otros con extremo amor y armonía, con amistad y compañerismo… Tan potente es la luz de la unidad que puede iluminar toda la tierra",
     fecha: "",
     lectura: ""
   }
@@ -25,7 +26,7 @@ const colaboradores = [
 ---
 <section class="flex items-center justify-center dark:bg-gray-900">
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 py-6" id="colaboradores">
-    <h2 class="col-span-full text-2xl font-bold text-indigo-600 dark:text-white">
+    <h2 class="col-span-full text-2xl text-brand-primary font-bold">
       Conoce a nuestros colaboradores
     </h2>
   {colaboradores.map((colaborador) => (

@@ -10,6 +10,8 @@ export default {
         },
         // Ejemplo: Agregar un nuevo color
         colors: {
+          'custom-gold': '#a27e26', // Este ya lo agregamos
+          'brand-primary': 'red', // <-- NUEVO COLOR PERSONALIZADO
           'official': 'oklch(0.65 0.18 281.83)', // Asegúrate que el formato oklch sea una cadena
           'custom-purple': '#7e5bef',
         },

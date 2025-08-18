@@ -1,104 +1,101 @@
 ---
-import { getCollection, getEntryBySlug, render } from "astro:content";
-const entry = await getCollection("books");
-const { Content } = await render(entry);
-// Importar imágenes dinámicamente
-const images = import.meta.glob('../assets/*.{png,jpg,jpeg,webp}');
+import { getCollection } from "astro:content";
+import Card from './Card.astro'; // <-- 1. IMPORTAR EL NUEVO COMPONENTE
 
-// Función para obtener la ruta de la imagen
+// Obtener colecciones
+const books = await getCollection("books");
+const mcuj = await getCollection("mcuj");
+const praysers = await getCollection("praysers");
+
+// Lógica para imágenes (sin cambios)
+const images = import.meta.glob('../assets/*.{png,jpg,jpeg,webp}');
 const getImage = async (imgName: string) => {
+  if (!imgName) return null;
   const imagePath = `../assets/${imgName}`;
-  return images[imagePath] ? await images[imagePath]() : null;
+  const imageModule = images[imagePath] ? await images[imagePath]() : null;
+  return imageModule?.default.src;
 };
 
-// Resolver todas las imágenes antes de renderizar
+// Preparar datos con imágenes
 const booksWithImages = await Promise.all(
-  entry.map(async (book:any) => {
-    const image:any = await getImage(book.data.image);
-    const resp = { ...book, img: image.default.src };
-    console.log(`Imagen para el libro ${book.data.title}:`, image);
-    return resp
-  })
+  books.map(async (book:any) => ({
+    ...book,
+    img: await getImage(book.data.image),
+  }))
 );
+
+const mcujWithImages = await Promise.all(
+  mcuj.map(async (message:any) => ({
+    ...message,
+    img: await getImage(message.data.image),
+  }))
+);
+const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
 ---
 
-<section id="books" class="p-4 dark:bg-gray-900 pt-3 lg:pt-0">
-  <h2 class="text-2xl font-bold text-indigo-600 dark:text-white mb-4 text-center">
-    Audiolibros publicados
-  </h2>
-  {
-    booksWithImages.map((book: any) => {
-      return (
-        <article class="flex bg-white transition hover:shadow-xl dark:bg-gray-900 dark:shadow-gray-800/25 mb-4 shadow-md rounded-lg">
-          <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
-            <time
-              datetime="2022-10-10"
-              class="flex items-center justify-between gap-4 text-xs font-bold text-gray-900 uppercase dark:text-white"
-            >
-              <span>{book.data.pubDate}</span>
-              <span class="w-px flex-1 bg-gray-900/10 dark:bg-white/10" />
-              <span>Publicación</span>
-            </time>
-          </div>
+<section id="books" class="p-4 pt-3 lg:pt-4">
+  <div class="container mx-auto">
 
-          <div class="hidden sm:block sm:basis-56">
-            {book.img ? (
-              <img
-                alt={book.data.title}
-                src={book.img}
-                class="aspect-square h-full w-full object-cover"
-              />
-            ) : (
-              <img
-                alt="Placeholder"
-                src="../assets/images/placeholder.png"
-                class="aspect-square h-full w-full object-cover"
-              />
-            )}
-          </div>
+    <!-- SECCIÓN DE AUDIOLIBROS -->
+    <div>
+      <h2 class="text-2xl font-bold text-brand-primary mb-8 text-center">
+        Audiolibros publicados
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {booksWithImages.map((book) => (
+          <Card 
+            title={book.data.title}
+            imgSrc={book.img}
+            pubDate={book.data.pubDate}
+            description={book.body}
+            url={book.data.url}
+            target={book.data.target}
+          />
+        ))}
+      </div>
+    </div>
 
-          <div class="flex flex-1 flex-col justify-between">
-            <div class="border-s border-gray-900/10 p-4 sm:!border-l-transparent sm:p-6 dark:border-white/10">
-              <a href="#">
-                <h3 class="font-bold text-gray-900 uppercase dark:text-white">
-                  {book.data.title}
-                </h3>
-              </a>
+    <!-- SECCIÓN DE MENSAJES -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-brand-primary text-center pb-4">
+        Mensajes de la Casa Universal de Justicia
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+        {mcujWithImages.map((message) => (
+          <Card 
+            title={message.data.title}
+            imgSrc={message.img}
+            pubDate={message.data.pubDate}
+            description={message.body}
+            url={message.data.url}
+            target={message.data.target}
+          />
+        ))}
+      </div>
+    </div>
 
-              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 dark:text-gray-200">
-                {book.data.description}
-                <br />
-              </p>
+    <!-- SECCIÓN DE ORACIONES -->
+    <div
+    class:list={[
+      "mt-4",
+      praysers.length === 0 ? "hidden" : ""
+    ]}>
+      <h2 class="text-2xl font-bold text-brand-primary text-center">
+        Selección de Oraciones
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+        {oraciones.map((book) => (
+          <Card 
+            title={book.data.title}
+            imgSrc={book.img}
+            pubDate={book.data.pubDate}
+            description={book.body}
+            url={book.data.url}
+            target={book.data.target}
+          />
+        ))}
+      </div>
+    </div>
 
-              <div class="prose dark:prose-invert mt-4">
-                <Content />
-              </div>
-            </div>
-
-            <div class="sm:flex sm:items-end sm:justify-end bg-white md:bg-custom-blue bg-official official-button">
-              <a
-                href={book.data.url}
-                target={book.data.target}
-                class="block  px-5 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-indigo-700 dark:text-white"
-              >
-                Escuchar
-              </a>
-            </div>
-          </div>
-        </article>
-      );
-    })
-  }
-  <style>
-    .bg-official {
-      background-color: white;
-    }
-    .official-button {
-      transition: background-color 0.3s ease;
-      background-color: var(--color-indigo-800);
-    }
-    .official-button a {
-      color: white;
-    }
-  </style>
+  </div>
 </section>

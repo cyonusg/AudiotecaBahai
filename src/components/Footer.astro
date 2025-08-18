@@ -2,8 +2,8 @@
 import Logo from '../components/Logo.astro';
 
 ---
-<footer class="bg-gray-100 ">
-  <div class="relative xs:items-center mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+<footer class="bg-secondary">
+  <div class="relative xs:items-center mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
     <div class="flex items-center flex-col lg:justify-between ">
       <!-- Logo -->
       <div class="wrap-logo">
@@ -16,22 +16,25 @@ import Logo from '../components/Logo.astro';
         <nav aria-label="Footer Navigation">
           <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end">
             <li>
-              <a class="text-gray-600 transition dark:hover:text-teal-300 a-official" href="/#quienesSomos">Quienes Somos</a>
+              <a class="text-white transition dark:hover:text-teal-300 a-official" href="/#quienesSomos">Quienes Somos</a>
             </li>
             <li>
-              <a class="text-gray-600 transition dark:hover:text-teal-300 a-official " href="/#books">AudioLibros</a>
+              <a class="text-white transition dark:hover:text-teal-300 a-official " href="/#books">AudioLibros</a>
             </li>
             <li>
-              <a class="text-gray-600 transition  dark:hover:text-teal-300 a-official" href="/#colaboradores">Colaboradores</a>
+              <a class="text-white transition  dark:hover:text-teal-300 a-official" href="/#colaboradores">Colaboradores</a>
             </li>
           </ul>
         </nav>
       </div>
     </div>
 
-    <p class="mt-6 text-center text-sm text-gray-500">
+    <p class="mt-6 text-center text-sm text-white">
       Copyright &copy; 2025. Todos los derechos reservados.
     </p>
+    <div>
+      <p class="text-center py-4 mb-6 mx-0 text-white"> Desarrollado por <a href="https://cyonusg.com" class="text-brand-primary font-bold">Cyonusg</a></p>
+    </div>
   </div>
 </footer>
 <style>

@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NUEVA CLASE DE COMPONENTE PERSONALIZADA */
+.btn-primary {
+  @apply px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md transition-colors hover:bg-indigo-700;
+}
+
+.text-brand-primary {
+  color: #a27e26;
+}
+
+.bg-brand-primary {
+  background-color: #a27e26;
+}
+
+.bg-brand {
+  background-color: #6b5218;
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-brand:hover {
+  background-color: #a27e26
+}
+
+.bg-secondary {
+  background-color: rgb(107, 21, 8);
+}

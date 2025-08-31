@@ -166,6 +166,14 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"mcuj": Record<string, {
+  id: string;
+  body?: string;
+  collection: "mcuj";
+  data: any;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 
 	};
 

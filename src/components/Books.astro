@@ -41,7 +41,7 @@ const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
       <h2 class="text-2xl font-bold text-brand-primary mb-8 text-center">
         Audiolibros publicados
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
         {booksWithImages.map((book) => (
           <Card 
             title={book.data.title}
@@ -60,7 +60,7 @@ const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
       <h2 class="text-2xl font-bold text-brand-primary text-center pb-4">
         Mensajes de la Casa Universal de Justicia
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 justify-items-center">
         {mcujWithImages.map((message) => (
           <Card 
             title={message.data.title}
@@ -83,7 +83,7 @@ const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
       <h2 class="text-2xl font-bold text-brand-primary text-center">
         Selección de Oraciones
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 justify-items-center">
         {oraciones.map((book) => (
           <Card 
             title={book.data.title}

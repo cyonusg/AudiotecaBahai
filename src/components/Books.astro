@@ -5,7 +5,7 @@ import Card from './Card.astro'; // <-- 1. IMPORTAR EL NUEVO COMPONENTE
 // Obtener colecciones
 const books = await getCollection("books");
 const mcuj = await getCollection("mcuj");
-const praysers = await getCollection("praysers");
+const prayers = await getCollection("prayers");
 
 // Lógica para imágenes (sin cambios)
 const images = import.meta.glob('../assets/*.{png,jpg,jpeg,webp}');
@@ -21,7 +21,7 @@ const booksWithImages = await Promise.all(
   books.map(async (book:any) => ({
     ...book,
     img: await getImage(book.data.image),
-  }))
+  })),
 );
 
 const mcujWithImages = await Promise.all(
@@ -30,7 +30,13 @@ const mcujWithImages = await Promise.all(
     img: await getImage(message.data.image),
   }))
 );
-const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
+
+const prayersWithImages = await Promise.all(
+  prayers.map(async (message:any) => ({
+    ...message,
+    img: await getImage(message.data.image),
+  }))
+);
 ---
 
 <section id="books" class="p-4 pt-3 lg:pt-4">
@@ -50,6 +56,7 @@ const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
             description={book.body}
             url={book.data.url}
             target={book.data.target}
+            pdfUrl={book.data.pdfUrl}
           />
         ))}
       </div>
@@ -78,20 +85,21 @@ const oraciones = booksWithImages.filter(b => b.data.category === 'oracion');
     <div
     class:list={[
       "mt-4",
-      praysers.length === 0 ? "hidden" : ""
+      prayers.length === 0 ? "hidden" : ""
     ]}>
       <h2 class="text-2xl font-bold text-brand-primary text-center">
         Selección de Oraciones
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2 justify-items-center">
-        {oraciones.map((book) => (
+        {prayersWithImages.map((prayer) => (
           <Card 
-            title={book.data.title}
-            imgSrc={book.img}
-            pubDate={book.data.pubDate}
-            description={book.body}
-            url={book.data.url}
-            target={book.data.target}
+            title={prayer.data.title}
+            imgSrc={prayer.img}
+            pubDate={prayer.data.pubDate}
+            description={prayer.body}
+            url={prayer.data.url}
+            target={prayer.data.target}
+            pdfUrl={prayer.data.pdfUrl}
           />
         ))}
       </div>

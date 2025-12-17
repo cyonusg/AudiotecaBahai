@@ -12,25 +12,25 @@ const colaboradores = [
     titulo: "La humildad exalta al hombre al cielo de la gloria y poder.",
     descripcion: "Crear herramientas que permitan comunion con Dios en el mundo digital.",
     fecha: "",
-    lectura: ""
+    lectura: ["Las palabras Ocultas", "los siete(7) valles"]
   },
   {
     nombre: "Eugenia Araujo",
     rol: "Narradora",
     imagen: eugeImage.src,
     titulo: "Cuidar las palabras es preservar el mensaje",
-    descripcion: "Sois los frutos de un solo árbol y las hojas de una sola rama. Trataos unos a otros con extremo amor y armonía, con amistad y compañerismo… Tan potente es la luz de la unidad que puede iluminar toda la tierra",
+    descripcion: "",
     fecha: "",
-    lectura: ""
+    lectura: ["La Proclamación de BAHÁ\’U\’LLÁH"]
   },
   {
-    nombre: "Cesar Gonzales",
+    nombre: "Cesar Gonzalez",
     rol: "Narrador",
     imagen: cesarImage.src,
     titulo: "Cuidar las palabras es preservar el mensaje",
-    descripcion: "Sois los frutos de un solo árbol y las hojas de una sola rama. Trataos unos a otros con extremo amor y armonía, con amistad y compañerismo… Tan potente es la luz de la unidad que puede iluminar toda la tierra",
+    descripcion: "",
     fecha: "",
-    lectura: ""
+    lectura: ["La tabla de Ahmad"]
   },
   {
     nombre: "Nicole Carrasco",
@@ -39,7 +39,7 @@ const colaboradores = [
     titulo: "Cuidar las palabras es preservar el mensaje",
     descripcion: "",
     fecha: "",
-    lectura: ""
+    lectura: []
   }
 ];
 
@@ -67,9 +67,20 @@ const colaboradores = [
 
           <p class="mt-1 text-sm text-gray-700 ">{colaborador.rol}</p>
 
-          <p class="mt-4 line-clamp-2 text-sm text-pretty text-gray-700">
+          <p class="mt-2 text-sm text-pretty text-gray-700">
             {colaborador.descripcion}
           </p>
+          
+          {colaborador.lectura && colaborador.lectura.length > 0 && (
+            <div class="mt-2">
+              <p class="text-xs font-medium text-gray-500">Libros narrados:</p>
+              <ul class="list-disc list-inside text-sm text-gray-700">
+                {colaborador.lectura.map((libro) => (
+                  <li class="ml-4">{libro}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </a>

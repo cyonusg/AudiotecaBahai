@@ -7,14 +7,26 @@ interface Props {
   url: string;
   target?: string;
   pdfUrl?: string;
+  tags?: string[];
+  voices?: string[];
 }
 
-const { title, imgSrc, pubDate, description, url, target, pdfUrl } = Astro.props;
+const { 
+  title, 
+  imgSrc, 
+  pubDate, 
+  description, 
+  url, 
+  target, 
+  pdfUrl, 
+  tags = [], 
+  voices = [] 
+} = Astro.props;
 const isDisabled = url === "#";
+const id = `modal-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<article class="flex flex-col bg-white transition hover:shadow-xl shadow-md rounded-lg overflow-hidden">
-  
+<article class="flex flex-col bg-white transition hover:shadow-xl shadow-md rounded-lg overflow-hidden cursor-pointer" onclick={`document.getElementById('${id}').classList.remove('hidden')`}>
   <!-- Imagen del libro -->
   <div class="relative">
     {imgSrc ? (
@@ -31,12 +43,9 @@ const isDisabled = url === "#";
       />
     )}
     <div class="absolute top-0 right-0 bg-white/75 p-2 rounded-bl-lg">
-      <time
-          datetime={pubDate}
-          class="block text-xs text-gray-700"
-        >
-          {pubDate}
-        </time>
+      <time datetime={pubDate} class="block text-xs text-gray-700">
+        {pubDate}
+      </time>
     </div>
   </div>
 
@@ -46,36 +55,68 @@ const isDisabled = url === "#";
       <h3 class="font-bold text-custom-gold uppercase">
         {title}
       </h3>
-
       <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
         {description}
       </p>
     </div>
+  </div>
 
-    <div class="mt-4">
-      <a
-        href={isDisabled ? undefined : url}
-        target={target}
-        class:list={[
-          "block w-full rounded px-5 py-3 text-center text-xs font-bold uppercase text-white transition mb-2",
-          isDisabled
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-[#a27e26] hover:bg-[#8a6c21]"
-        ]}
-        aria-disabled={isDisabled}
-      >
-        {isDisabled ? "Próximamente" : "Escuchar"}
-      </a>
-      {pdfUrl && (
-        <a
-          href={pdfUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block text-center text-xs text-gray-600 hover:text-indigo-600 transition-colors"
-        >
-          Ver PDF
-        </a>
-      )}
+  <!-- Modal/Popup -->
+  <div id={id} class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onclick="event.stopPropagation(); this.classList.add('hidden')">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-2xl font-bold text-custom-gold">{title}</h3>
+          <button 
+            onclick={`document.getElementById('${id}').classList.add('hidden')`}
+            class="text-gray-400 hover:text-gray-600"
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
+        </div>
+        
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold">Sinopsis:</h4>
+            <p class="text-gray-700">{description}</p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-semibold">Idioma:</h4>
+              <p>{tags.length > 0 ? tags.join(', ') : 'No especificado'}</p>
+            </div>
+            <div>
+              <h4 class="font-semibold">Narrador:</h4>
+              <p>{voices && voices.length > 0 ? voices.join(', ') : 'Por definir'}</p>
+            </div>
+          </div>
+          
+          <div class="pt-4 flex flex-col space-y-2">
+            {!isDisabled && (
+              <a
+                href={url}
+                target={target}
+                class="w-full text-center bg-[#a27e26] hover:bg-[#8a6c21] text-white font-bold py-2 px-4 rounded transition"
+              >
+                Escuchar
+              </a>
+            )}
+            
+            {pdfUrl && (
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition"
+              >
+                Ver PDF
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </article>

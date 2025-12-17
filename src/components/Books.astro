@@ -77,6 +77,8 @@ const prayersWithImages = await Promise.all(
           url={book.data.url}
           target={book.data.target}
           pdfUrl={book.data.pdfUrl}
+          tags={book.data.tags || []}
+          voices={book.data.voices || []}
         />
       ))}
     </div>
@@ -92,6 +94,8 @@ const prayersWithImages = await Promise.all(
           url={prayer.data.url}
           target={prayer.data.target}
           pdfUrl={prayer.data.pdfUrl}
+          tags={prayer.data.tags || []}
+          voices={prayer.data.voices || []}
         />
       ))}
     </div>
@@ -106,6 +110,8 @@ const prayersWithImages = await Promise.all(
           description={message.body}
           url={message.data.url}
           target={message.data.target}
+          tags={message.data.tags || []}
+          voices={message.data.voices || []}
         />
       ))}
     </div>

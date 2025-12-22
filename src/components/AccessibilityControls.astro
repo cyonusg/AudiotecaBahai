@@ -1,0 +1,107 @@
+---
+interface Props {
+  // No se necesitan props por ahora, pero mantenemos la interfaz para futuras expansiones
+}
+
+const storageKey = 'fontSizePreference';
+---
+
+<!-- Script de inicialización y funciones -->
+<script is:inline>
+  // Función para actualizar el tamaño de fuente
+  function updateFontSize(change) {
+    const html = document.documentElement;
+    const currentSize = parseFloat(getComputedStyle(html).fontSize);
+    const newSize = currentSize + change;
+    
+    // Limitar el tamaño entre 12px y 24px (75% a 150% de 16px)
+    if (newSize >= 12 && newSize <= 24) {
+      const percentage = Math.round((newSize / 16) * 100);
+      html.style.setProperty('--font-size', `${percentage}%`);
+      localStorage.setItem('fontSizePreference', percentage.toString());
+    }
+  }
+
+  // Función para restablecer el tamaño de fuente
+  function resetFontSize() {
+    document.documentElement.style.setProperty('--font-size', '100%');
+    localStorage.setItem('fontSizePreference', '100');
+  }
+
+  // Inicialización del tamaño de fuente al cargar
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedSize = localStorage.getItem('fontSizePreference');
+    if (savedSize) {
+      document.documentElement.style.setProperty('--font-size', `${savedSize}%`);
+    }
+  });
+</script>
+
+<div class="accessibility-controls fixed bottom-4 right-4 z-50 flex flex-col gap-2 bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200">
+  <div class="flex items-center gap-2">
+    <button 
+      id="decrease-font" 
+      aria-label="Disminuir tamaño de texto"
+      title="Disminuir tamaño de texto"
+      class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+      onclick="updateFontSize(-2)"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+    
+    <button 
+      id="reset-font" 
+      aria-label="Restablecer tamaño de texto"
+      title="Tamaño de texto normal"
+      class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+      onclick="resetFontSize()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </button>
+    
+    <button 
+      id="increase-font" 
+      aria-label="Aumentar tamaño de texto"
+      title="Aumentar tamaño de texto"
+      class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+      onclick="updateFontSize(2)"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="text-xs text-center text-gray-600">
+    Tamaño de texto
+  </div>
+</div>
+
+<style>
+  :root {
+    --font-size: 100%;
+  }
+  
+  html {
+    font-size: var(--font-size);
+    transition: font-size 0.2s ease;
+  }
+  
+  .accessibility-controls {
+    font-size: 16px; /* Tamaño fijo para los controles */
+  }
+  
+  @media (max-width: 640px) {
+    .accessibility-controls {
+      bottom: 1rem;
+      right: 1rem;
+      padding: 0.5rem;
+    }
+  }
+</style>
